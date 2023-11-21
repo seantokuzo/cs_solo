@@ -7,7 +7,7 @@ import {
 
 const router = express.Router()
 
-router.post('/signin', signin)
+router.get('/signin', signin)
 router.post('/signout', signout)
 router.post('/revoke', revokeDiscordToken)
 
