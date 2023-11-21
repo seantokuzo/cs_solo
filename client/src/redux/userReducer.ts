@@ -1,43 +1,35 @@
-import { createSlice } from '@reduxjs/toolkit'
-// import { UserActions } from './userActions'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { LoginPayload } from './userPayloadTypes'
 
 interface UserState {
-  user: string
+  username: string
   avatar: string
   nickname: string
   cohort: string
 }
 
 const initialState: UserState = {
-  user: '',
+  username: '',
   avatar: '',
   nickname: '',
   cohort: '',
 }
 
-// interface UserSliceInterface {
-//   name: string
-//   initialState: UserState
-//   reducers: {
-//     loginUser: (state: UserState, payload: UserActions) => UserState
-//     logoutUser: (state: UserState) => UserState
-//   }
-// }
-
-// export const userSlice = createSlice<UserSliceInterface>({
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    loginUser: (state, action) => {
+    loginUser: (state, action: PayloadAction<LoginPayload>): UserState => {
       console.log('Login User Reducer')
       console.log('State: ', state)
       console.log('Action: ', action)
+      return state
     },
-    logoutUser: (state, action) => {
+    logoutUser: (state, action): UserState => {
       console.log('Logout User Reducer')
       console.log('State: ', state)
       console.log('Action: ', action)
+      return state
     },
   },
 })

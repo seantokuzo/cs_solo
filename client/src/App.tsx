@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import WhereArtThou from './pages/WhereArtThou'
+import MainMenu from './pages/MainMenu'
 
 const App = () => {
   return (
