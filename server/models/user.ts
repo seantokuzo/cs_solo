@@ -1,25 +1,24 @@
 import mongoose from 'mongoose'
+import bcrypt from 'bcryptjs'
 
-type UserRole = 'user' | 'staff' | 'admin' | 'dev'
+type Cohort = 'ECRI 43' | 'ECRI 44' | 'CTRI 19'
 
 interface UserAttrs {
   username: string
   discordName: string
   avatar: string
-  discordId?: string
-  locale?: string
-  accessToken?: string
-  refreshToken?: string
+  cohort?: Cohort
+  accessToken: string
+  refreshToken: string
 }
 
 export interface UserDoc extends mongoose.Document {
   username: string
   discordName: string
   avatar: string
-  discordId?: string
-  locale?: string
-  accessToken?: string
-  refreshToken?: string
+  cohort?: Cohort
+  accessToken: string
+  refreshToken: string
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -41,19 +40,17 @@ const userSchema = new mongoose.Schema(
     avatar: {
       type: String,
     },
-    discordId: {
+    cohort: {
       type: String,
-      // required: true,
-      // unique: true
     },
     accessToken: {
       type: String,
-      // required: true,
+      required: true,
       // unique: true
     },
     refreshToken: {
       type: String,
-      // required: true,
+      required: true,
       // unique: true
     },
   },
@@ -70,6 +67,28 @@ const userSchema = new mongoose.Schema(
     },
   },
 )
+
+userSchema.pre('save', async function () {
+  if (!this.isModified('accessToken')) return
+
+  const salt = await bcrypt.genSalt(10)
+  const hashedAccessToken = await bcrypt.hash(this.accessToken, salt)
+
+  this.accessToken = hashedAccessToken
+})
+userSchema.pre('save', async function () {
+  if (!this.isModified('refreshToken')) return
+
+  const salt = await bcrypt.genSalt(10)
+  const hashedRefreshToken = await bcrypt.hash(this.refreshToken, salt)
+
+  this.refreshToken = hashedRefreshToken
+})
+
+userSchema.methods.compareTokens = async function (providedToken: string) {
+  const tokensMatch = await bcrypt.compare(providedToken, this.password)
+  return tokensMatch
+}
 
 userSchema.statics.build = (attrs: UserAttrs) => {
   return new User(attrs)
