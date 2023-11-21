@@ -6,6 +6,8 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import routes from './routes'
+import { NotFoundError } from './errors/not-found-error'
+import { errorHandler } from './middlewares/error-handler'
 
 const app = express()
 
@@ -27,11 +29,9 @@ app.use(
 app.use('/api/v1', routes)
 
 app.all('*', async (req, res) => {
-  return res.status(404).json({ err: 'Not Found' })
+  throw new NotFoundError()
 })
 
-app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-  return res.status(500).json({ err: err })
-})
+app.use(errorHandler)
 
 export { app }

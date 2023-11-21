@@ -1,5 +1,6 @@
 import { app } from './app'
 import mongoose from 'mongoose'
+import { DatabaseConnectionError } from './errors/db-connection-error'
 
 const port = process.env.PORT || 5000
 
@@ -13,7 +14,7 @@ const start = async () => {
       console.log(`💥 Listening on port ${port}`)
     })
   } catch (err) {
-    console.log(err)
+    throw new DatabaseConnectionError()
   }
 }
 
