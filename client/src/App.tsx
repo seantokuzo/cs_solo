@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import WhereArtThou from './pages/WhereArtThou'
 import MainMenu from './pages/MainMenu'
+import Forbidden from './pages/Forbidden'
 
 const App = () => {
   return (
@@ -9,6 +10,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/menu" element={<MainMenu />} />
+        <Route path="/forbidden" element={<Forbidden />} />
         <Route path="*" element={<WhereArtThou />} />
       </Routes>
     </div>

@@ -4,16 +4,16 @@ import { useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getCurrentUser } from '../utils/getCurrentUser'
+// import { getCurrentUser } from '../utils/getCurrentUser'
 
 const Home = () => {
   const user = useSelector((state: RootState) => state.user)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    const user = getCurrentUser()
-    console.log(user)
-  }, [])
+  // useEffect(() => {
+  //   const user = getCurrentUser()
+  //   console.log(user)
+  // }, [])
 
   useEffect(() => {
     if (user.username) {
