@@ -36,12 +36,17 @@ export default {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
+        wofSpin: {
+          '0%': { transform: 'rotate(0turn)' },
+          '100%': { transform: 'rotate(1turn)' },
+        },
       },
       animation: {
         loadspin: 'spin 5s linear infinite',
         revspin: 'revspin 5s linear infinite',
         fadein: 'fadein 500ms ease-out forwards',
         forbidden: 'fadein 2000ms ease-in 1500ms forwards',
+        wofSpin: 'wofSpin 4000ms linear infinite',
       },
     },
   },

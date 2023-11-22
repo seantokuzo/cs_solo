@@ -49,6 +49,7 @@ const Home = () => {
       <a
         className={`w-[300px] px-10 py-2
         bg-discord shadow-shDiscord
+        hover:shadow-shDiscordRev
         rounded-lg hover:scale-105 transition-all
         text-xl
         text-black text-center font-bold uppercase

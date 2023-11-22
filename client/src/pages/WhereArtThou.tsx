@@ -1,6 +1,6 @@
-import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import { FaChevronLeft } from "react-icons/fa6"
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { FaCircleChevronLeft } from 'react-icons/fa6'
 
 const WhereArtThou: React.FC = () => {
   const navigate = useNavigate()
@@ -25,15 +25,10 @@ const WhereArtThou: React.FC = () => {
         // allowFullScreen
       ></img>
       <h3 className="my-4">Get Me Outta Here</h3>
-      <button
-        className="w-14 h-14 p-8
-        border-2 brdr-white rounded-full
-        text-4xl text-white
-        flex justify-center items-center"
-        onClick={() => navigate("/")}
-      >
-        <FaChevronLeft />
-      </button>
+      <FaCircleChevronLeft
+        className="hover:scale-110 hover:shadow-shadowLg cursor-pointer text-6xl"
+        onClick={() => navigate('/home')}
+      />
     </section>
   )
 }

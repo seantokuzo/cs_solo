@@ -1,24 +1,19 @@
 import express from 'express'
 import {
-  deleteUser,
-  getCurrentUser,
-  updateUser,
-} from '../controllers/user-controller'
+  getCurrentGame,
+  getUserGame,
+  updateUserGame,
+} from '../controllers/wof-controller'
 import { currentUser } from '../middlewares/current-user'
 import { requireAuth } from '../middlewares/require-auth'
-import {
-  // deleteCurrentGame,
-  getCurrentGame,
-  // updateCurrentGame,
-} from '../controllers/wof-controller'
 
 const router = express.Router()
 
-// router.use(currentUser)
-// router.use(requireAuth)
+router.use(currentUser)
+router.use(requireAuth)
 router.get('/', getCurrentGame)
-
-// router.patch('/', updateCurrentGame)
+router.get('/my-game', getUserGame)
+router.patch('/my-game', updateUserGame)
 // router.delete('/', deleteCurrentGame)
 
 export default router

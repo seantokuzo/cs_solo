@@ -22,8 +22,8 @@ router.use(currentUser)
 router.use(requireAuth)
 
 // DEMO
-router.patch('/update-cohort', updateUser)
-// router.patch('/update-cohort', cohortUpdateLimit, updateUser)
+// router.patch('/update-cohort', updateUser)
+router.patch('/update-cohort', cohortUpdateLimit, updateUser)
 
 // TODO
 router.delete('/delete', deleteUser)
