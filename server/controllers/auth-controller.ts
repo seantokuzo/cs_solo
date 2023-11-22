@@ -67,8 +67,8 @@ export const signin = async (req: Request, res: Response) => {
 /* ********** SIGN OUT ********** */
 export const signout = async (req: Request, res: Response) => {
   console.log('💥 authController - Sign Out')
-  console.log(req.session)
-  req.session = null
+  // req.session = null
+  req.session = undefined
   console.log(req.session)
   return res.send({})
 }

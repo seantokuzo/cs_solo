@@ -20,6 +20,8 @@ export default {
         basicLg:
           '6px 6px 10px rgba(0, 0, 0, 0.35), 8px 8px 10px rgba(0, 0, 0, 0.25)',
         shDiscord: 'inset 6px 6px 6px #2d3697, inset -6px -6px 6px #6574ef',
+        shDiscordRev:
+          'inset 6px 6px 6px #6574ef, inset -6px -6px 6px #2d3697, 2px 2px 6px rgba(0, 0, 0, 0.35), 3px 3px 6px rgba(0, 0, 0, 0.25)',
       },
       keyframes: {
         spin: {

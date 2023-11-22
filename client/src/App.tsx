@@ -5,6 +5,8 @@ import MainMenu from './pages/MainMenu'
 import Forbidden from './pages/Forbidden'
 import ProtectedRoute from './pages/ProtectedRoute'
 import SharedLayout from './pages/SharedLayout'
+import Wof from './pages/Wof'
+import Account from './pages/Account'
 
 const App = () => {
   return (
@@ -15,6 +17,8 @@ const App = () => {
           element={<ProtectedRoute children={<SharedLayout />} />}
         >
           <Route index element={<MainMenu />} />
+          <Route path="/me" element={<Account />} />
+          <Route path="/wheel-of-fortune" element={<Wof />} />
         </Route>
         <Route path="/home" element={<Home />} />
         <Route path="/forbidden" element={<Forbidden />} />

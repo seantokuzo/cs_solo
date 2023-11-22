@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../redux/store'
 import { AiFillHome } from 'react-icons/ai'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { axiosBaseUrl } from '../utils/baseUrls'
 import axios from 'axios'
 import { logoutUser } from '../redux/userReducer'
@@ -30,14 +30,19 @@ const Header = () => {
       className="absolute top-0 w-full px-4 py-4
       flex justify-between items-center"
     >
-      <div
+      <Link
+        to="/"
         className={`w-12 h-12 flex flex-col justify-center items-center
-      border-2 border-discord rounded-full
-      cursor-pointer hover:shadow-basicLg hover:scale-110 transition-all
-      ${pathname === '/' ? 'text-discord' : 'text-colorDark bg-discord'}`}
+        rounded-full
+        cursor-pointer hover:shadow-basicLg hover:scale-110 transition-all
+      ${
+        pathname === '/'
+          ? 'text-discord border-2 border-discord'
+          : 'text-colorDark bg-discord hover:shadow-shDiscordRev'
+      }`}
       >
         <AiFillHome className="w-8 h-8" />
-      </div>
+      </Link>
       <div className="relative">
         <img
           className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14
