@@ -1,10 +1,10 @@
 import { Request } from 'express'
 import jwt from 'jsonwebtoken'
 
-export const attachCooke = (req: Request, payload: { id: string }) => {
+export const attachCookie = (req: Request, userId: string) => {
   const userJwt = jwt.sign(
     {
-      id: payload.id,
+      id: userId,
     },
     process.env.JWT_KEY!,
     {
