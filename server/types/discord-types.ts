@@ -8,6 +8,7 @@ export enum DISCORD_API_ROUTES {
 export interface DiscordUserResponse {
   id: string
   username: string
+  discriminator: string
   avatar: string | null
 }
 

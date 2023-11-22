@@ -1,6 +1,8 @@
 export interface LoginPayload {
   username: string
   avatar: string
-  nickname?: string
+  discordName: string
+  discordId: string
+  discriminator: string
   cohort?: string
 }

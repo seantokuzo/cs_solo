@@ -6,6 +6,8 @@ type Cohort = 'ECRI 43' | 'ECRI 44' | 'CTRI 19'
 interface UserAttrs {
   username: string
   discordName: string
+  discordId: string
+  discriminator: string
   avatar: string
   cohort?: Cohort
   accessToken: string
@@ -15,6 +17,8 @@ interface UserAttrs {
 export interface UserDoc extends mongoose.Document {
   username: string
   discordName: string
+  discordId: string
+  discriminator: string
   avatar: string
   cohort?: Cohort
   accessToken: string
@@ -34,6 +38,14 @@ const userSchema = new mongoose.Schema(
       unique: true,
     },
     discordName: {
+      type: String,
+      required: true,
+    },
+    discordId: {
+      type: String,
+      required: true,
+    },
+    discriminator: {
       type: String,
       required: true,
     },
