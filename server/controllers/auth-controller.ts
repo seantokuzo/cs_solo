@@ -36,14 +36,14 @@ export const signin = async (req: Request, res: Response) => {
 
   const belongsToAcceptedServer = checkAcceptedServers(userServers)
   if (!belongsToAcceptedServer) {
-    console.log("❌ You don't belong here")
+    // console.log("❌ You don't belong here")
     return res.redirect('http://localhost:5150/forbidden')
     // throw new BadRequestError('You do not belong to an accepted server')
   }
   const existingUser = await User.findOne({ discordName: user.username })
 
   if (existingUser) {
-    console.log('💥 Found existing user')
+    // console.log('💥 Found existing user')
     attachCookie(req, existingUser.id)
     return res.status(200).redirect('http://localhost:5150/')
   }
@@ -66,7 +66,7 @@ export const signin = async (req: Request, res: Response) => {
 
 /* ********** SIGN OUT ********** */
 export const signout = async (req: Request, res: Response) => {
-  console.log('💥 authController - Sign Out')
+  // console.log('💥 authController - Sign Out')
   // req.session = null
   req.session = undefined
   console.log(req.session)
@@ -75,7 +75,7 @@ export const signout = async (req: Request, res: Response) => {
 
 /* ********** REVOKE DISCORD TOKEN ********** */
 export const revokeDiscordToken = async (req: Request, res: Response) => {
-  console.log('💥 authController - Revoke Discord Token')
+  // console.log('💥 authController - Revoke Discord Token')
 
   res.status(200).json({})
 }

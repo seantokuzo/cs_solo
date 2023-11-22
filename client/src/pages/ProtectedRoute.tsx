@@ -9,7 +9,6 @@ type Props = {
 
 const ProtectedRoute = ({ children }: Props) => {
   const user = useSelector((state: RootState) => state.user)
-  console.log(user)
 
   if (user.isLoading) {
     return (

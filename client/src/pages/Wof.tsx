@@ -16,7 +16,8 @@ interface WofGame {
 }
 
 interface UserWofGame {
-  guesses: string[]
+  badGuesses: string[]
+  goodGuesses: string[]
   score: number
   win: boolean
   lose: boolean
@@ -27,8 +28,6 @@ const Wof = () => {
   const [userGame, setUserGame] = useState<UserWofGame | null>(null)
   const [spinAmount, setSpinAmount] = useState(0)
 
-  console.log(userGame)
-
   useEffect(() => {
     getTodaysGame()
   }, [])
@@ -36,7 +35,6 @@ const Wof = () => {
   const getTodaysGame = async () => {
     try {
       const response = await authFetch('/wof')
-      console.log(response.data)
       setGame({
         answer: response.data.answer.toUpperCase(),
         category: response.data.category.toUpperCase(),
@@ -85,7 +83,7 @@ const Wof = () => {
       >
         {userGame?.win || userGame?.lose
           ? char
-          : userGame?.guesses.includes(char)
+          : userGame?.goodGuesses.includes(char)
           ? char
           : ''}
       </div>
@@ -103,9 +101,9 @@ const Wof = () => {
           </span>
         </p>
         <p className="text-2xl">
-          Guesses Remain:{' '}
+          Strikes Left:{' '}
           <span className="text-red-300 text-3xl">
-            {8 - (userGame?.guesses.length || 0)}
+            {5 - (userGame?.badGuesses.length || 0)}
           </span>
         </p>
       </div>
@@ -169,12 +167,14 @@ const Wof = () => {
                     className={`min-w-[45px] text-center
                     mx-1.5 text-2xl p-3 rounded-sm
                     ${
-                      userGame?.guesses.includes(letter)
+                      userGame?.goodGuesses.includes(letter) ||
+                      userGame?.badGuesses.includes(letter)
                         ? 'text-colorLight bg-colorLight/20 border-red-300/20 border-2 cursor-not-allowed'
                         : 'text-colorDark bg-colorLight'
                     }`}
                     onClick={() => {
-                      if (userGame?.guesses.includes(letter)) return
+                      if (userGame?.goodGuesses.includes(letter)) return
+                      if (userGame?.badGuesses.includes(letter)) return
                       handleGuess(letter)
                     }}
                   >

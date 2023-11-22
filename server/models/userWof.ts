@@ -2,7 +2,8 @@ import mongoose from 'mongoose'
 
 interface userWofAttrs {
   user: string
-  guesses: string[]
+  badGuesses: string[]
+  goodGuesses: string[]
   score: number
   win: boolean
   lose: boolean
@@ -11,7 +12,8 @@ interface userWofAttrs {
 
 export interface userWofDoc extends mongoose.Document {
   user: string
-  guesses: string[]
+  badGuesses: string[]
+  goodGuesses: string[]
   score: number
   win: boolean
   lose: boolean
@@ -28,6 +30,16 @@ const userWofSchema = new mongoose.Schema(
     guesses: {
       type: [String],
       required: true,
+    },
+    badGuesses: {
+      type: [String],
+      required: true,
+      default: [],
+    },
+    goodGuesses: {
+      type: [String],
+      required: true,
+      default: [],
     },
     score: {
       type: Number,

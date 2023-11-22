@@ -7,7 +7,6 @@ const Forbidden = () => {
   const magicWordStr = "YOU DIDN'T SAY THE MAGIC WORD!"
 
   useEffect(() => {
-    console.log(magicWord.length)
     if (magicWord.length >= 175) return
     setTimeout(() => {
       setMagicWord((prev) => [...prev, magicWordStr])

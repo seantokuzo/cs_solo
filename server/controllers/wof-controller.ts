@@ -9,7 +9,7 @@ import { CurrentUserReq } from '../middlewares/current-user'
 
 // TODO
 export const getCurrentGame = async (req: Request, res: Response) => {
-  console.log('💥 WOF Controller - Get Current Game')
+  // console.log('💥 WOF Controller - Get Current Game')
   const currentDate = new Date(new Date(Date.now()).toDateString()).getTime()
   const currentGame = await Wof.findOne({
     date: {
@@ -39,7 +39,7 @@ export const getCurrentGame = async (req: Request, res: Response) => {
 }
 
 export const getUserGame = async (req: CurrentUserReq, res: Response) => {
-  console.log('💥 WOF Controller - Get User Game')
+  // console.log('💥 WOF Controller - Get User Game')
   if (!req.currentUser) throw new NotAuthorizedError()
 
   const currentDate = new Date(new Date(Date.now()).toDateString()).getTime()
@@ -53,13 +53,14 @@ export const getUserGame = async (req: CurrentUserReq, res: Response) => {
   })
 
   if (userGame) {
-    console.log('Found a Current Game')
+    // console.log('Found a Current Game')
     return res.status(200).send(userGame)
   }
 
   const newGame = UserWof.build({
     user: req.currentUser.id,
-    guesses: [],
+    badGuesses: [],
+    goodGuesses: [],
     score: 0,
     win: false,
     lose: false,
@@ -72,7 +73,7 @@ export const getUserGame = async (req: CurrentUserReq, res: Response) => {
 
 // // TODO
 export const updateUserGame = async (req: CurrentUserReq, res: Response) => {
-  console.log('💥 WOF Controller - Update User Game')
+  // console.log('💥 WOF Controller - Update User Game')
   const { guess, dollars, answer } = req.body
   if (!guess) {
     throw new BadRequestError('Must provide a valid guess')
@@ -100,18 +101,20 @@ export const updateUserGame = async (req: CurrentUserReq, res: Response) => {
 
   if (answerLetters.includes(guess)) {
     currentUsergame.score = currentUsergame.score + dollars
+    currentUsergame.goodGuesses = [...currentUsergame.goodGuesses, guess]
+  } else {
+    currentUsergame.badGuesses = [...currentUsergame.badGuesses, guess]
   }
-  currentUsergame.guesses = [...currentUsergame.guesses, guess]
   await currentUsergame.save()
 
   if (
     answerLetters.every((letter: string) =>
-      currentUsergame.guesses.includes(letter),
+      currentUsergame.goodGuesses.includes(letter),
     )
   ) {
     currentUsergame.win = true
     await currentUsergame.save()
-  } else if (currentUsergame.guesses.length >= 8) {
+  } else if (currentUsergame.badGuesses.length >= 5) {
     currentUsergame.lose = true
     currentUsergame.score = 0
     await currentUsergame.save()

@@ -30,9 +30,6 @@ export const userSlice = createSlice({
       return state
     },
     loginUser: (state, action: PayloadAction<LoginPayload>): UserState => {
-      // console.log('Login User Reducer')
-      console.log('Login State: ', state)
-      // console.log('Action: ', action)
       const {
         username,
         discordName,
@@ -51,8 +48,6 @@ export const userSlice = createSlice({
       return state
     },
     logoutUser: (state): UserState => {
-      console.log('Logout User Reducer')
-      console.log('Logout State: ', state)
       state = initialState
       return state
     },
